@@ -18,7 +18,7 @@ function SubmitChapterForm({ storyId, parentChapterId, onSubmissionSuccess }) {
     setMessage('Submitting...');
 
     try {
-      const response = await fetch('http://localhost:3001/api/chapters', {
+      const response = await fetch('https://storyforge-7oc4.onrender.com/api/chapters', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

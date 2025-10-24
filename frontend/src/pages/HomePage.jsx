@@ -13,7 +13,7 @@ function HomePage() {
     async function fetchStories() {
       try {
         // Our backend API is running on port 3001
-        const response = await fetch('http://localhost:3001/api/stories');
+        const response = await fetch('https://storyforge-7oc4.onrender.com/api/stories');
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

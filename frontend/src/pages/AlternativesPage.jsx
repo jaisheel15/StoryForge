@@ -13,7 +13,7 @@ function AlternativesPage() {
     async function fetchAlternatives() {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:3001/api/chapters/pending/${parentChapterId}`);
+        const response = await fetch(`https://storyforge-7oc4.onrender.com/api/chapters/pending/${parentChapterId}`);
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

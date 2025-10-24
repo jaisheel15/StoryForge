@@ -22,7 +22,7 @@ function StoryPage() {
   const fetchStory = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:3001/api/stories/${storyId}/canon`);
+      const response = await fetch(`https://storyforge-7oc4.onrender.com/api/stories/${storyId}/canon`);
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       const data = await response.json();
       setStoryData(data);
@@ -44,7 +44,7 @@ const handleAdvance = async () => {
 
     setAdvanceMessage('Advancing story...');
     try {
-      const response = await fetch(`http://localhost:3001/api/stories/${storyId}/advance`, {
+      const response = await fetch(`https://storyforge-7oc4.onrender.com/api/stories/${storyId}/advance`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -78,7 +78,7 @@ const handleAdvance = async () => {
 
     try {
       setLoadingSubmissions(true);
-      const response = await fetch(`http://localhost:3001/api/chapters/pending/${lastCanonChapterId}`);
+      const response = await fetch(`https://storyforge-7oc4.onrender.com/api/chapters/pending/${lastCanonChapterId}`);
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       const data = await response.json();
       setSubmissions(data);
@@ -153,7 +153,7 @@ const handleVote = async (chapterId) => {
     setVoteMessage('Casting vote...'); // Show loading feedback
 
     try {
-      const response = await fetch(`http://localhost:3001/api/chapters/${chapterId}/vote`, {
+      const response = await fetch(`https://storyforge-7oc4.onrender.com/api/chapters/${chapterId}/vote`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`, // <-- Send the token

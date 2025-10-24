@@ -19,7 +19,7 @@ function LoginPage() {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:3001/auth/register', {
+      const response = await fetch('https://storyforge-7oc4.onrender.com/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ const handleLogin = async (e) => {
 
     try {
       // ... (your existing fetch logic is fine) ...
-      const response = await fetch('http://localhost:3001/auth/login', {
+      const response = await fetch('https://storyforge-7oc4.onrender.com/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

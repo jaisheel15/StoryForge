@@ -17,7 +17,7 @@ function CreateStoryPage() {
     setMessage('Creating story...');
 
     try {
-      const response = await fetch('http://localhost:3001/api/stories', {
+      const response = await fetch('https://storyforge-7oc4.onrender.com/api/stories', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
