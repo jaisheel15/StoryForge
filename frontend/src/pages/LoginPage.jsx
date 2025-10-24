@@ -15,7 +15,7 @@ function LoginPage() {
     setMessage('');
 
     try {
-      const response = await fetch('https://storyforge-backend.onrender.com/auth/login', {
+      const response = await fetch('https://storyforge-7oc4.onrender.com/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -12,7 +12,7 @@ function RegisterPage() {
     setMessage('');
 
     try {
-      const response = await fetch('https://storyforge-backend.onrender.com/auth/register', {
+      const response = await fetch('https://storyforge-7oc4.onrender.com/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
