@@ -13,25 +13,36 @@ function SubmitChapterForm({ storyId, parentChapterId, onSubmissionSuccess }) {
       setMessage('Chapter content cannot be empty.');
       return;
     }
+    
+    if (!storyId || !parentChapterId) {
+      setMessage('Error: Missing story or chapter information.');
+      console.error('Missing required IDs:', { storyId, parentChapterId });
+      return;
+    }
 
     setIsSubmitting(true);
     setMessage('Submitting...');
 
     try {
+      const payload = {
+        story_id: parseInt(storyId),
+        parent_chapter_id: parseInt(parentChapterId),
+        content: content.trim(),
+      };
+      
+      console.log('Submitting chapter with payload:', payload);
+      
       const response = await fetch('https://storyforge-7oc4.onrender.com/api/chapters', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          story_id: storyId,
-          parent_chapter_id: parentChapterId,
-          content: content,
-        }),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
+      console.log('Server response:', data);
 
       if (!response.ok) {
         throw new Error(data.error || 'Failed to submit chapter.');
@@ -49,21 +60,27 @@ function SubmitChapterForm({ storyId, parentChapterId, onSubmissionSuccess }) {
   };
 
   return (
-<form onSubmit={handleSubmit} className="mt-4">
-      <div className="form-group">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        placeholder="Write what happens next..."
-        rows="8"
-        className="form-textarea"
+        placeholder="Continue the story here..."
+        rows="5"
+        className="w-full rounded-lg border border-gray-600 bg-gray-900 focus:ring-blue-500 focus:border-blue-500 transition-colors text-base text-gray-200 p-3"
         required
       />
- </div>
-<button type="submit" className="btn-primary" disabled={isSubmitting}>
+      <button 
+        type="submit" 
+        className="self-end px-5 py-2.5 rounded-lg text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled={isSubmitting}
+      >
         {isSubmitting ? 'Submitting...' : 'Submit Chapter'}
       </button>
-      {message && <p className="mt-2">{message}</p>}
+      {message && (
+        <p className={`text-sm text-center ${message.includes('Error') ? 'text-red-400' : 'text-green-400'}`}>
+          {message}
+        </p>
+      )}
     </form>
   );
 }

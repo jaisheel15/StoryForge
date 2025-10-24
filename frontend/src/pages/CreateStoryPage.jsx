@@ -44,23 +44,61 @@ function CreateStoryPage() {
   };
 
   return (
-    <div className="card p-6"> {/* <-- USE CARD CLASS */}
-      <h1 className="text-2xl font-bold mb-4">Start a New Story</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label className="form-label">Title:</label>
-          <input type="text" className="form-input" value={title} onChange={(e) => setTitle(e.target.value)} required />
+    <main className="flex flex-1 items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+      <div className="w-full max-w-2xl rounded-xl bg-gray-800 p-8 shadow-lg md:p-10">
+        <div className="flex flex-col gap-8">
+          <div>
+            <h1 className="text-3xl font-black leading-tight tracking-[-0.033em] text-white">
+              Start a New Story
+            </h1>
+          </div>
+          
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+            <label className="flex flex-col">
+              <p className="pb-2 text-base font-medium text-gray-200">Title</p>
+              <input 
+                type="text"
+                className="h-14 w-full flex-1 resize-none overflow-hidden rounded-lg border border-gray-700 bg-gray-900/50 p-4 text-base font-normal leading-normal text-gray-100 placeholder:text-gray-500 focus:border-blue-500 focus:outline-0 focus:ring-2 focus:ring-blue-500/50" 
+                placeholder="Enter your story's title" 
+                value={title} 
+                onChange={(e) => setTitle(e.target.value)} 
+                required 
+              />
+            </label>
+            
+            <label className="flex flex-col">
+              <p className="pb-2 text-base font-medium text-gray-200">Chapter 1 Content</p>
+              <textarea 
+                className="w-full flex-1 resize-y overflow-hidden rounded-lg border border-gray-700 bg-gray-900/50 p-4 text-base font-normal leading-normal text-gray-100 placeholder:text-gray-500 focus:border-blue-500 focus:outline-0 focus:ring-2 focus:ring-blue-500/50" 
+                placeholder="Once upon a time..." 
+                rows="10"
+                value={content} 
+                onChange={(e) => setContent(e.target.value)} 
+                required
+              />
+            </label>
+            
+            <div>
+              <button 
+                type="submit"
+                className="flex h-12 w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-blue-600 px-5 text-base font-bold leading-normal tracking-[0.015em] text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isSubmitting}
+              >
+                <span className="truncate">
+                  {isSubmitting ? 'Creating...' : 'Create Story'}
+                </span>
+              </button>
+            </div>
+            
+            {message && (
+              <p className={`text-center text-sm ${message.includes('Error') ? 'text-red-400' : 'text-green-400'}`}>
+                {message}
+              </p>
+            )}
+          </form>
         </div>
-        <div className="form-group">
-          <label className="form-label">Chapter 1 Content:</label>
-          <textarea rows="10" className="form-textarea" value={content} onChange={(e) => setContent(e.target.value)} required />
-        </div>
-        <button type="submit" className="btn-primary" disabled={isSubmitting}>
-          {isSubmitting ? 'Creating...' : 'Create Story'}
-        </button>
-        {message && <p>{message}</p>}
-      </form>
-    </div>
+      </div>
+    </main>
   );
 }
 

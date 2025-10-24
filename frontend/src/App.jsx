@@ -13,9 +13,9 @@ import RegisterPage from './pages/RegisterPage';
 function App() {
   return (
     <Router>
-      <div className="bg-gray-100 min-h-screen">
+      <div className="bg-gray-900 min-h-screen">
       <Navbar />
-      <main className="app-container p-4">
+      <main className="app-container">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
