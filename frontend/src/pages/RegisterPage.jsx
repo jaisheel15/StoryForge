@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 
-function LoginPage() {
+function RegisterPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  
   const navigate = useNavigate();
-  const { login } = useAuth();
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setMessage('');
 
     try {
-      const response = await fetch('https://storyforge-backend.onrender.com/auth/login', {
+      const response = await fetch('https://storyforge-backend.onrender.com/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,11 +26,12 @@ function LoginPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to log in.');
+        throw new Error(data.error || 'Failed to register.');
       }
-      
-      login(data);
-      navigate('/'); // Redirect to homepage on success
+
+      // On success, send them to the login page
+      setMessage(`Registration successful! Please log in.`);
+      navigate('/login');
 
     } catch (err) {
       setMessage(err.message);
@@ -42,8 +40,8 @@ function LoginPage() {
 
   return (
     <div className="card max-w-md mx-auto p-6"> {/* Centered card */}
-      <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-      <form onSubmit={handleLogin}>
+      <h2 className="text-2xl font-bold mb-4 text-center">Create an Account</h2>
+      <form onSubmit={handleRegister}>
         <div className="form-group">
           <label className="form-label">Username:</label>
           <input
@@ -64,19 +62,19 @@ function LoginPage() {
             required
           />
         </div>
-        <button type="submit" className="btn-primary w-full mt-2">Login</button>
+        <button type="submit" className="btn-primary w-full mt-2">Register</button>
       </form>
-
+      
       {message && <p className="text-center mt-4">{message}</p>}
-
+      
       <p className="text-center mt-4 text-gray-600">
-        Don't have an account?{' '}
-        <Link to="/register" className="font-bold text-blue-600 hover:underline">
-          Register Here
+        Already have an account?{' '}
+        <Link to="/login" className="font-bold text-blue-600 hover:underline">
+          Log In
         </Link>
       </p>
     </div>
   );
 }
 
-export default LoginPage;
+export default RegisterPage;

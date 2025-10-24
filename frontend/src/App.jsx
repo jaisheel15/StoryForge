@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import CreateStoryPage from './pages/CreateStoryPage';
 import AlternativesPage from './pages/AlternativesPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/story/:storyId" element={<StoryPage />} />
           <Route path="/story/:storyId/alternatives/:parentChapterId"  element={<AlternativesPage />} />
 
